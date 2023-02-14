@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+import { axios } from 'axios';
+import React, { useState, useEffect } from 'react'
 import { Card, Container, Col, Row } from 'react-bootstrap';
 // import { FontAwesomeIcon } from './@fortawesome/react-fontawesome@latest'
 
@@ -11,6 +12,20 @@ export default function Notes({ notes, setNotes }) {
         setNotes(notes.filter(n => n.id !== id))
 
     }
+    const baseURL = "http://[::1]:3000/notes";
+
+    useEffect(() => {
+
+        const init = async () => {
+            const resp = await axios.get(baseURL)
+            console.log("tsfdata", resp.data)
+            setNotes(resp.data)
+
+
+
+
+        }; init();
+    }, [])
 
 
     return (
